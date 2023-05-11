@@ -1,49 +1,49 @@
-'use strict';
+"use strict";
 
 /**
  * Lifecycle callbacks for the `Admin` model.
  */
 
 module.exports = {
-  collectionName: 'admin_users',
+  collectionName: "admin_users",
   info: {
-    name: 'User',
-    description: '',
-    singularName: 'user',
-    pluralName: 'users',
-    displayName: 'User',
+    name: "User",
+    description: "",
+    singularName: "user",
+    pluralName: "users",
+    displayName: "User",
   },
   pluginOptions: {
-    'content-manager': {
+    "content-manager": {
       visible: false,
     },
-    'content-type-builder': {
+    "content-type-builder": {
       visible: false,
     },
   },
   attributes: {
     firstname: {
-      type: 'string',
+      type: "string",
       unique: false,
       minLength: 1,
       configurable: false,
       required: false,
     },
     lastname: {
-      type: 'string',
+      type: "string",
       unique: false,
       minLength: 1,
       configurable: false,
       required: false,
     },
     username: {
-      type: 'string',
+      type: "string",
       unique: false,
       configurable: false,
       required: false,
     },
     email: {
-      type: 'email',
+      type: "email",
       minLength: 6,
       configurable: false,
       required: true,
@@ -51,7 +51,7 @@ module.exports = {
       private: true,
     },
     password: {
-      type: 'password',
+      type: "password",
       minLength: 6,
       configurable: false,
       required: false,
@@ -59,19 +59,19 @@ module.exports = {
       searchable: false,
     },
     resetPasswordToken: {
-      type: 'string',
+      type: "string",
       configurable: false,
       private: true,
       searchable: false,
     },
     registrationToken: {
-      type: 'string',
+      type: "string",
       configurable: false,
       private: true,
       searchable: false,
     },
     isActive: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
       configurable: false,
       private: true,
@@ -79,24 +79,37 @@ module.exports = {
     roles: {
       configurable: false,
       private: true,
-      type: 'relation',
-      relation: 'manyToMany',
-      inversedBy: 'users',
-      target: 'admin::role',
+      type: "relation",
+      relation: "manyToMany",
+      inversedBy: "users",
+      target: "admin::role",
       // FIXME: Allow setting this
-      collectionName: 'strapi_users_roles',
+      collectionName: "strapi_users_roles",
     },
     blocked: {
-      type: 'boolean',
+      type: "boolean",
       default: false,
       configurable: false,
       private: true,
     },
     preferedLanguage: {
-      type: 'string',
+      type: "string",
       configurable: false,
       required: false,
       searchable: false,
+    },
+    timezone: {
+      type: "customField",
+      customField: "plugin::timezone-select.timezone",
+    },
+    fcm_tokens: {
+      type: "text",
+    },
+    avatar: {
+      type: "media",
+      multiple: false,
+      required: false,
+      allowedTypes: ["images"],
     },
   },
 };
